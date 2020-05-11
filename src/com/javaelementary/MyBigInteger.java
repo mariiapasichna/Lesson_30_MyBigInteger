@@ -8,12 +8,7 @@ public class MyBigInteger {
     }
 
     public MyBigInteger(String val) {
-        char[] chars = val.toCharArray();
-        int[] arr = new int[chars.length];
-        for (int i = 0; i < chars.length; i++) {
-            arr[i] = Character.getNumericValue(chars[i]);
-        }
-        this.number = arr;
+        this.number = convertStringToArray(val);
     }
 
     public MyBigInteger add(MyBigInteger val) {
@@ -32,9 +27,7 @@ public class MyBigInteger {
         }
         StringBuilder stringBuilder = new StringBuilder(result.length);
         for (int i = 0; i < result.length; i++) {
-            if (i == 0 && result[i] == 0) {
-                continue;
-            } else {
+            if (i != 0 && result[i] != 0) {
                 stringBuilder.append(result[i]);
             }
         }
@@ -48,5 +41,13 @@ public class MyBigInteger {
             stringBuilder.append(i);
         }
         return stringBuilder.toString();
+    }
+
+    private int[] convertStringToArray(String val) {
+        int[] arr = new int[val.length()];
+        for (int i = 0; i < val.length(); i++) {
+            arr[i] = Character.getNumericValue(val.charAt(i));
+        }
+        return arr;
     }
 }
